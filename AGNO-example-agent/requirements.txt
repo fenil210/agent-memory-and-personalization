@@ -2,3 +2,5 @@ agno
 google-genai
 python-dotenv
 markitdown[all]
+pyyaml
+streamlit
