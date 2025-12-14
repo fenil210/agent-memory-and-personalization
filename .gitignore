@@ -1,0 +1,4 @@
+assistant.db
+*.db
+/knowledge_db
+/__pycache__

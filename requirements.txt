@@ -4,3 +4,8 @@ python-dotenv
 markitdown[all]
 pyyaml
 streamlit
+lancedb
+pandas
+langfuse
+openlit
+fastapi

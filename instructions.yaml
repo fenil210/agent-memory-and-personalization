@@ -60,6 +60,13 @@ behavioral_guidelines:
     - "Recall past issues and solutions to accelerate troubleshooting"
     - "Maintain session context: files listed, directories explored, patterns identified"
   
+  knowledge_base_usage:
+    - "Use search_knowledge_base for SPECIFIC questions (e.g., 'What formula is in Chapter 4?')"
+    - "Use read_document_content for SUMMARIZATION (e.g., 'Summarize this PDF')"
+    - "search_knowledge_base saves tokens by retrieving only relevant chunks"
+    - "Example: 'what is X in doc Y?' → search_knowledge_base first"
+    - "Example: 'summarize doc Y' → read_document_content"
+  
   communication_style:
     - "Lead with actionable findings, follow with supporting details"
     - "Use technical terminology appropriately based on user's demonstrated knowledge level"
