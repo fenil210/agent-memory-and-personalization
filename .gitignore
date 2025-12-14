@@ -2,3 +2,4 @@ assistant.db
 *.db
 /knowledge_db
 /__pycache__
+/.venv

@@ -174,42 +174,100 @@ python local_assistant.py
 
 ## 💡 Usage Examples
 
-### Example 1: Index and Query Documents
+### Example 1: Auto-Index and Query Documents
+
+**User asks about specific content without explicitly indexing:**
 
 ```
-User: "Index the file D:\docs\networking_guide.pdf"
-Agent: ✅ Indexed networking_guide.pdf: 45 chunks created
-
-User: "What does it say about TCP/IP protocols?"
-Agent: [Uses search_knowledge_base]
-      Retrieved 3 relevant chunks:
-      
-      "TCP/IP is a suite of communication protocols..."
-      [Provides focused answer from specific sections]
+User: "Explain Spread Spectrum from Chapter 6 of DC"
 ```
+
+**Agent's autonomous workflow:**
+1. 🔧 `list_directory_contents` - Finds material directory
+2. 🔧 `list_directory_contents` - Navigates to DC folder
+3. 🔧 `list_directory_contents` - Finds lecture files
+4. 🔧 `get_indexed_documents` - Checks if already indexed
+5. 🔧 `index_document` - Auto-indexes Chapter 6 (12 chunks created)
+6. 🔧 `search_knowledge_base` - Retrieves only relevant chunks about Spread Spectrum
+7. ✅ Returns precise answer using ~500 tokens (not full 5000+ token document)
+
+**Key: Agent automatically indexed when needed, then used RAG for efficient retrieval!**
+
+---
 
 ### Example 2: Smart Tool Routing
 
-| User Query | Tool Used | Why |
-|------------|-----------|-----|
-| "What's the formula in section 3?" | `search_knowledge_base` | Specific query → RAG retrieval |
-| "Summarize this entire PDF" | `read_document_content` | Needs full context |
-| "Find all Python files" | `search_files_by_name` | File system operation |
-| "How would I organize 50 files?" | `ReasoningTools` + response | Complex thinking required |
+**Specific Query → Uses RAG:**
+```
+User: "What does section 3.2 say about bandwidth?"
+Agent: Uses search_knowledge_base
+      → Retrieves 5 relevant chunks (500 tokens)
+      → Cost: $0.0004
+```
 
-### Example 3: Memory & Personalization
+**Summarization → Uses Full Read:**
+```
+User: "Summarize Chapter 4 of OOP"
+Agent: Uses read_document_content
+      → Loads complete document (5000 tokens)
+      → Cost: $0.0018 (necessary for full context)
+```
+
+| Query Type | Tool Used | Tokens | Why |
+|------------|-----------|--------|-----|
+| "Explain X from Chapter Y" | `search_knowledge_base` | ~500 | Specific topic extraction |
+| "Summarize entire document" | `read_document_content` | ~5000 | Needs complete context |
+| "Find formula in section Z" | `search_knowledge_base` | ~500 | Targeted information |
+
+---
+
+### Example 3: Personalized Memory
+
+**Agent automatically learns and remembers:**
 
 ```
 Session 1:
-User: "My name is Alex and I prefer concise bullet-point answers"
-Agent: ✅ Noted! I'll remember that.
+User: "I'm working with D:\MATERIAL FOR 3RD SEM"
+Agent: ✅ [Stores in memory]
 
-Session 2 (Same user_id):
-User: "What are the key features?"
-Agent: • RAG knowledge base
-       • User memory
-       • Cost tracking
-       [Uses remembered preference automatically]
+Session 2 (later):
+User: "Show me the DC lectures"
+Agent: [Remembers directory] → Goes directly to D:\MATERIAL FOR 3RD SEM\DC
+```
+
+**Stored Memories (viewable in sidebar):**
+- `memory_id: 04e51616...` - "User has access to directory D:\MATERIAL FOR 3RD SEM"
+- `memory_id: 0705890d...` - "User loves Chapter 4 of DC"
+- `memory_id: ...` - "User prefers concise bullet-point answers"
+
+**Impact:** Faster responses, no repeated questions, truly personalized experience!
+
+---
+
+### Example 4: RAG Workflow Visualization
+
+**Query: "Explain Spread Spectrum from Chapter 6"**
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant A as Agent
+    participant FS as File System
+    participant KB as Knowledge Base (LanceDB)
+    
+    U->>A: "Explain Spread Spectrum from Chapter 6"
+    A->>FS: list_directory_contents (find material)
+    FS-->>A: Found DC folder
+    A->>KB: get_indexed_documents
+    KB-->>A: Not indexed yet
+    A->>FS: Read Chapter 6.pdf
+    A->>KB: index_document (12 chunks, 768d vectors)
+    KB-->>A: ✅ Indexed successfully
+    A->>KB: search_knowledge_base("Spread Spectrum")
+    KB-->>A: 5 relevant chunks (500 tokens)
+    A->>U: ✅ Precise answer about Spread Spectrum
+    
+    Note over A,KB: Saved 4500 tokens vs full read!
 ```
 
 ---
