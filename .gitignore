@@ -3,3 +3,4 @@ assistant.db
 /knowledge_db
 /__pycache__
 /.venv
+.env

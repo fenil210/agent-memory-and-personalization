@@ -1,4 +1,4 @@
-# 🤖 Local Assistant - AI-Powered File Management Agent
+#  Local Assistant - AI-Powered File Management Agent
 
 > An intelligent local file system assistant with RAG, memory, reasoning capabilities, and full observability powered by AGNO + Gemini 2.5 Flash
 
@@ -9,7 +9,7 @@
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Features](#-features)
 - [Architecture](#-architecture)
@@ -22,22 +22,22 @@
 
 ---
 
-## ✨ Features
+##  Features
 
 | Feature | Description | Benefit |
 |---------|-------------|---------|
-| **🧠 RAG Knowledge Base** | Vector-based document search with Gemini embeddings (768d) | 80% token savings for specific queries |
-| **💾 User Memory** | Persistent memory across sessions (SQLite) | Learns preferences and context |
-| **🤔 Reasoning Tools** | Explicit chain-of-thought for complex tasks | Transparent decision-making |
-| **📊 Session Management** | Auto-compress long conversations | Efficient context window usage |
-| **💰 Cost Tracking** | Real-time token & cost monitoring | Input/output breakdown with accurate pricing |
-| **🔍 Observability** | Full Langfuse integration via OTEL | Trace all interactions, tools, RAG queries |
-| **📄 Document Processing** | PDF, DOCX, PPTX, images via markitdown | Universal file support |
-| **🎯 Smart Tool Selection** | Context-aware tool routing | RAG for queries, full read for summaries |
+| ** RAG Knowledge Base** | Vector-based document search with Gemini embeddings (768d) | 80% token savings for specific queries |
+| ** User Memory** | Persistent memory across sessions (SQLite) | Learns preferences and context |
+| ** Reasoning Tools** | Explicit chain-of-thought for complex tasks | Transparent decision-making |
+| ** Session Management** | Auto-compress long conversations | Efficient context window usage |
+| ** Cost Tracking** | Real-time token & cost monitoring | Input/output breakdown with accurate pricing |
+| ** Observability** | Full Langfuse integration via OTEL | Trace all interactions, tools, RAG queries |
+| ** Document Processing** | PDF, DOCX, PPTX, images via markitdown | Universal file support |
+| ** Smart Tool Selection** | Context-aware tool routing | RAG for queries, full read for summaries |
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```mermaid
 graph TB
@@ -84,7 +84,7 @@ sequenceDiagram
     RAG->>DB: Vector search
     DB-->>RAG: Top 5 relevant chunks
     RAG-->>Agent: Focused context (500 tokens)
-    Agent-->>User: Answer ✅ (Low cost)
+    Agent-->>User: Answer  (Low cost)
     
     Note over User,FS: Query: "Summarize entire document"
     User->>Agent: Summarization request
@@ -92,12 +92,12 @@ sequenceDiagram
     Full->>FS: Load complete file
     FS-->>Full: Full text (5000 tokens)
     Full-->>Agent: Complete context
-    Agent-->>User: Summary ✅ (Higher cost, necessary)
+    Agent-->>User: Summary  (Higher cost, necessary)
 ```
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Core Framework
 | Component | Technology | Purpose |
@@ -124,7 +124,7 @@ sequenceDiagram
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Prerequisites
 ```bash
@@ -172,7 +172,7 @@ python local_assistant.py
 
 ---
 
-## 💡 Usage Examples
+##  Usage Examples
 
 ### Example 1: Auto-Index and Query Documents
 
@@ -183,13 +183,13 @@ User: "Explain Spread Spectrum from Chapter 6 of DC"
 ```
 
 **Agent's autonomous workflow:**
-1. 🔧 `list_directory_contents` - Finds material directory
-2. 🔧 `list_directory_contents` - Navigates to DC folder
-3. 🔧 `list_directory_contents` - Finds lecture files
-4. 🔧 `get_indexed_documents` - Checks if already indexed
-5. 🔧 `index_document` - Auto-indexes Chapter 6 (12 chunks created)
-6. 🔧 `search_knowledge_base` - Retrieves only relevant chunks about Spread Spectrum
-7. ✅ Returns precise answer using ~500 tokens (not full 5000+ token document)
+1.  `list_directory_contents` - Finds material directory
+2.  `list_directory_contents` - Navigates to DC folder
+3.  `list_directory_contents` - Finds lecture files
+4.  `get_indexed_documents` - Checks if already indexed
+5.  `index_document` - Auto-indexes Chapter 6 (12 chunks created)
+6.  `search_knowledge_base` - Retrieves only relevant chunks about Spread Spectrum
+7.  Returns precise answer using ~500 tokens (not full 5000+ token document)
 
 **Key: Agent automatically indexed when needed, then used RAG for efficient retrieval!**
 
@@ -197,20 +197,20 @@ User: "Explain Spread Spectrum from Chapter 6 of DC"
 
 ### Example 2: Smart Tool Routing
 
-**Specific Query → Uses RAG:**
+**Specific Query  Uses RAG:**
 ```
 User: "What does section 3.2 say about bandwidth?"
 Agent: Uses search_knowledge_base
-      → Retrieves 5 relevant chunks (500 tokens)
-      → Cost: $0.0004
+       Retrieves 5 relevant chunks (500 tokens)
+       Cost: $0.0004
 ```
 
-**Summarization → Uses Full Read:**
+**Summarization  Uses Full Read:**
 ```
 User: "Summarize Chapter 4 of OOP"
 Agent: Uses read_document_content
-      → Loads complete document (5000 tokens)
-      → Cost: $0.0018 (necessary for full context)
+       Loads complete document (5000 tokens)
+       Cost: $0.0018 (necessary for full context)
 ```
 
 | Query Type | Tool Used | Tokens | Why |
@@ -228,11 +228,11 @@ Agent: Uses read_document_content
 ```
 Session 1:
 User: "I'm working with D:\MATERIAL FOR 3RD SEM"
-Agent: ✅ [Stores in memory]
+Agent:  [Stores in memory]
 
 Session 2 (later):
 User: "Show me the DC lectures"
-Agent: [Remembers directory] → Goes directly to D:\MATERIAL FOR 3RD SEM\DC
+Agent: [Remembers directory]  Goes directly to D:\MATERIAL FOR 3RD SEM\DC
 ```
 
 **Stored Memories (viewable in sidebar):**
@@ -262,17 +262,17 @@ sequenceDiagram
     KB-->>A: Not indexed yet
     A->>FS: Read Chapter 6.pdf
     A->>KB: index_document (12 chunks, 768d vectors)
-    KB-->>A: ✅ Indexed successfully
+    KB-->>A:  Indexed successfully
     A->>KB: search_knowledge_base("Spread Spectrum")
     KB-->>A: 5 relevant chunks (500 tokens)
-    A->>U: ✅ Precise answer about Spread Spectrum
+    A->>U:  Precise answer about Spread Spectrum
     
     Note over A,KB: Saved 4500 tokens vs full read!
 ```
 
 ---
 
-## 💰 Cost Analysis
+##  Cost Analysis
 
 ### Gemini 2.5 Flash Pricing
 
@@ -285,7 +285,7 @@ sequenceDiagram
 
 | Scenario | Method | Tokens Used | Cost | Savings |
 |----------|--------|-------------|------|---------|
-| "What is X in doc?" | **RAG** (5 chunks) | 500 input + 100 output | $0.00040 | **80%** ✅ |
+| "What is X in doc?" | **RAG** (5 chunks) | 500 input + 100 output | $0.00040 | **80%**  |
 | "What is X in doc?" | Full read | 5000 input + 100 output | $0.00175 | Baseline |
 | "Summarize doc" | Full read (required) | 5000 input + 300 output | $0.00225 | N/A |
 
@@ -296,21 +296,21 @@ sequenceDiagram
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 AGNO-example-agent/
-├── 📄 app.py                    # Streamlit web UI (main entry)
-├── 📄 local_assistant.py        # CLI interface
-├── 📄 file_tools.py             # File system operations
-├── 📄 knowledge_tools.py        # RAG: indexing + search
-├── 📄 observability.py          # Langfuse OTEL integration
-├── 📄 instructions.yaml         # Agent behavior & guidelines
-├── 📄 requirements.txt          # Python dependencies
-├── 📄 .env                      # API keys (gitignored)
-├── 📊 assistant.db              # SQLite: user memories
-├── 🗂️ knowledge_db/             # LanceDB: vector embeddings
-└── 📝 README.md                 # This file
+  app.py                    # Streamlit web UI (main entry)
+  local_assistant.py        # CLI interface
+  file_tools.py             # File system operations
+  knowledge_tools.py        # RAG: indexing + search
+  observability.py          # Langfuse OTEL integration
+  instructions.yaml         # Agent behavior & guidelines
+  requirements.txt          # Python dependencies
+  .env                      # API keys (gitignored)
+  assistant.db              # SQLite: user memories
+  knowledge_db/             # LanceDB: vector embeddings
+  README.md                 # This file
 ```
 
 ### Key Files
@@ -324,7 +324,7 @@ AGNO-example-agent/
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 ### Agent Tuning
 
@@ -357,7 +357,7 @@ EMBEDDING_DIMENSION = 768    # Gemini embedding size
 
 ---
 
-## 📊 Observability Dashboard
+##  Observability Dashboard
 
 ### Langfuse Metrics
 
@@ -383,7 +383,7 @@ After setup, view in [Langfuse Dashboard](https://cloud.langfuse.com):
 
 ---
 
-## 🎯 Advanced Features
+##  Advanced Features
 
 ### Session Summaries
 
@@ -391,13 +391,13 @@ Automatic context compression after 10 messages:
 - Keeps recent 4 messages intact
 - Summarizes older messages
 - Reduces LLM context window usage
-- Displayed with 📋 icon in chat
+- Displayed with  icon in chat
 
 ### Reasoning Display
 
 Agent can "think aloud" for complex problems:
 - Uses AGNO's `ReasoningTools`
-- Shown in 🧠 expandable section
+- Shown in  expandable section
 - Transparent decision-making process
 
 ### Memory Viewer
@@ -410,7 +410,7 @@ Sidebar tool to inspect stored memories:
 
 ---
 
-## 🧪 Testing Examples
+##  Testing Examples
 
 ### Test RAG
 
@@ -440,13 +440,13 @@ Sidebar tool to inspect stored memories:
 # Check Langfuse for detailed trace view
 ```
 
-## 📝 License
+##  License
 
 MIT
 
 ---
 
-## 🔗 Resources
+##  Resources
 
 - [AGNO Documentation](https://agno.com/docs)
 - [Gemini API](https://ai.google.dev/gemini-api/docs)
