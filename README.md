@@ -26,14 +26,14 @@
 
 | Feature | Description | Benefit |
 |---------|-------------|---------|
-| ** RAG Knowledge Base** | Vector-based document search with Gemini embeddings (768d) | 80% token savings for specific queries |
-| ** User Memory** | Persistent memory across sessions (SQLite) | Learns preferences and context |
-| ** Reasoning Tools** | Explicit chain-of-thought for complex tasks | Transparent decision-making |
-| ** Session Management** | Auto-compress long conversations | Efficient context window usage |
-| ** Cost Tracking** | Real-time token & cost monitoring | Input/output breakdown with accurate pricing |
-| ** Observability** | Full Langfuse integration via OTEL | Trace all interactions, tools, RAG queries |
-| ** Document Processing** | PDF, DOCX, PPTX, images via markitdown | Universal file support |
-| ** Smart Tool Selection** | Context-aware tool routing | RAG for queries, full read for summaries |
+| **RAG Knowledge Base** | Vector-based document search with Gemini embeddings (768d) | 80% token savings for specific queries |
+| **User Memory** | Persistent memory across sessions (SQLite) | Learns preferences and context |
+| **Reasoning Tools** | Explicit chain-of-thought for complex tasks | Transparent decision-making |
+| **Session Management** | Auto-compress long conversations | Efficient context window usage |
+| **Cost Tracking** | Real-time token & cost monitoring | Input/output breakdown with accurate pricing |
+| **Observability** | Full Langfuse integration via OTEL | Trace all interactions, tools, RAG queries |
+| **Document Processing** | PDF, DOCX, PPTX, images via markitdown | Universal file support |
+| **Smart Tool Selection** | Context-aware tool routing | RAG for queries, full read for summaries |
 
 ---
 
