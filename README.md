@@ -428,7 +428,7 @@ Sidebar tool to inspect stored memories:
 
 ```bash
 # Send 15 messages in one session
-# After message 11, earlier messages should show as summary with 📋 icon
+# After message 11, earlier messages are compressed into a summwerized version to save tokens
 ```
 
 ### Test Cost Tracking
@@ -439,18 +439,6 @@ Sidebar tool to inspect stored memories:
 # - Accurate cost calculation
 # Check Langfuse for detailed trace view
 ```
-
----
-
-## 🤝 Contributing
-
-Contributions welcome! This project demonstrates:
-- SOLID principles in agent design
-- Production OTEL patterns
-- Cost-efficient RAG implementation
-- Clean separation of concerns
-
----
 
 ## 📝 License
 
